@@ -19,25 +19,49 @@ import java.util.Objects;
  *
  * @author: Rafael Sánchez González-Palacios
  */
-public class PersonDTO {
+public class Person {
     private ReadOnlyStringWrapper id;
     private StringProperty name;
     private StringProperty surname;
-    private StringProperty dni;
+    private StringProperty nif;
 
-    public PersonDTO(String id, String name, String surname, String dni) throws IllegalArgumentException{
-        if (Helper.checkDni(dni)){
-            this.dni = new SimpleStringProperty(dni);
-        } else {
-            throw new IllegalArgumentException("Invalid DNI. DNI must be a valid DNI.");
-        }
+    /***
+     * Este constructor se utilizará para la importación del modelo desde la base de datos.
+     *
+     * @param id
+     * @param name
+     * @param surname
+     * @param nif
+     * @throws NullPointerException
+     * @throws IllegalArgumentException
+     */
+    public Person(String id, String name, String surname, String nif) throws NullPointerException, IllegalArgumentException{
+        Objects.requireNonNull(id, "El parámetro ID no puede ser nulo");
         if (Helper.checkUUID(id)){
             this.id = new ReadOnlyStringWrapper(id);
         } else {
-            throw new IllegalArgumentException("Invalid ID. Id must be a valid UUID.");
+            throw new IllegalArgumentException("UUID no válido");
         }
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
+        this.nif = new SimpleStringProperty(nif);
+    }
+
+    /***
+     * Este constructor se utilizará desde la aplicación. Contiene los datos mínimos requeridos marcados
+     * como 'not null' en la base de datos.
+     * @param name
+     * @param nif
+     * @throws NullPointerException
+     * @throws IllegalArgumentException
+     */
+    public Person(String name, String nif) throws NullPointerException {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(nif);
+        this.name = new SimpleStringProperty(name);
+        this.nif = new SimpleStringProperty(nif);
+        this.id = new ReadOnlyStringWrapper();
+        this.surname = new SimpleStringProperty();
     }
 
     public String getId() {
@@ -72,16 +96,16 @@ public class PersonDTO {
         this.surname.set(surname);
     }
 
-    public String getDni() {
-        return dni.get();
+    public String getNif() {
+        return nif.get();
     }
 
-    public StringProperty dniProperty() {
-        return dni;
+    public StringProperty nifProperty() {
+        return nif;
     }
 
-    public void setDni(String dni) {
-        this.dni.set(dni);
+    public void setNif(String nif) {
+        this.nif.set(nif);
     }
 
     // La comparación y el hashcode se establece en el elemento más distintivo de una persona, que es su DNI.
@@ -89,22 +113,22 @@ public class PersonDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PersonDTO personDTO = (PersonDTO) o;
-        return Objects.equals(getDni(), personDTO.getDni());
+        Person person = (Person) o;
+        return Objects.equals(getNif(), person.getNif());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getDni());
+        return Objects.hashCode(getNif());
     }
 
     @Override
     public String toString() {
-        return "PersonDTO{" +
-                "id=" + id +
-                ", name=" + name +
-                ", surname=" + surname +
-                ", dni=" + dni +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName()).append(" ");
+        if (getSurname() != null) sb.append(getSurname()).append(" ");
+        sb.append(getNif()).append(" ");
+        return sb.toString();
+
     }
 }

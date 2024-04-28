@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="dam.davinci.tarea10.controllers.ModifyVehicleController"
+          prefHeight="400.0" prefWidth="600.0"
+          style="-fx-spacing: 5; -fx-padding: 10; -fx-hgap: 10; -fx-vgap: 15; -fx-border-insets: 3;
+            -fx-border-radius: 3; -fx-border-color: grey">
+    <columnConstraints>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+        <ColumnConstraints hgrow="NEVER"/>
+        <ColumnConstraints hgrow="SOMETIMES"/>
+    </columnConstraints>
+    <Label text="Marca:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="fieldBrand" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    <Label text="Modelo:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+    <TextField fx:id="fieldModel" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+    <Label text="Matrícula:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="fieldPlate" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    <Label text="Kilómetros:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+    <TextField fx:id="fieldKilometers" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+    <Label text="Propietario" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="comboOwners" GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.columnSpan="3" maxWidth="Infinity"/>
+    <Label text="Descripción" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <TextArea fx:id="fieldDescription" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+    <ButtonBar GridPane.rowIndex="5" GridPane.columnSpan="4" style="-fx-font-size: 16; -fx-font-weight: BOLD">
+        <buttons>
+            <Button text="Guardar cambios" onAction="#saveChanges" style="-fx-min-height: 50; -fx-min-width: 150; -fx-text-fill: GREEN"/>
+            <Button text="Cancelar" onAction="#cancel" style="-fx-min-height: 50; -fx-text-fill: RED"/>
+        </buttons>
+    </ButtonBar>
+
+
+</GridPane>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--
+Rafael Sánchez González-Palacios
+
+Este fichero es la vista del menú principal de la aplicación
+-->
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="dam.davinci.tarea10.controllers.MainSceneController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-font-size: 14">
+    <top>
+        <VBox style="-fx-alignment: center">
+            <MenuBar>
+                <Menu text="Info">
+                    <MenuItem text="Acerca de..."
+                              onAction="#showInfoDialog" />
+                </Menu>
+            </MenuBar>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="vehicleTable" style="-fx-padding: 2">
+            <columns>
+                <TableColumn fx:id="columnBrand" text="Marca" />
+                <TableColumn fx:id="columnModel" text="Modelo"/>
+                <TableColumn fx:id="columnPlate" text="Matrícula"/>
+                <TableColumn fx:id="columnNotes" text="Notas"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <right>
+        <VBox>
+            <VBox alignment="TOP_CENTER" VBox.vgrow="SOMETIMES" style="-fx-padding: 10; -fx-spacing: 10; -fx-border-color: grey;
+            -fx-border-insets: 3; -fx-border-radius: 3">
+                <Label text="Vehículos" />
+                <Button text="Nuevo vehículo" onAction="#newVehicle" style="-fx-min-width: 200; -fx-min-height: 50"/>
+                <Button fx:id="buttonModifyVehicle" text="Modificar vehículo" onAction="#modifyVehicle" style="-fx-min-width: 200; -fx-min-height: 50"/>
+                <Separator/>
+                <Button fx:id="buttonDeleteVehicle" text="Borrar vehículo" onAction="#deleteVehicle"
+                        style="-fx-min-width: 200; -fx-min-height: 50"/>
+            </VBox>
+            <VBox alignment="TOP_CENTER" VBox.vgrow="SOMETIMES" style="-fx-padding: 10; -fx-spacing: 10; -fx-border-color: grey;
+            -fx-border-insets: 3; -fx-border-radius: 3">
+                <Label text="Propietarios"/>
+                <Button text="Gestionar Propietarios" onAction="#manageOwners" style="-fx-min-width: 200; -fx-min-height: 50"/>
+            </VBox>
+        </VBox>
+    </right>
+
+</BorderPane>

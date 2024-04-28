@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="dam.davinci.tarea10.controllers.InfoDialog"
+           prefHeight="150.0" prefWidth="310.0">
+
+    <VBox alignment="CENTER" maxHeight="Infinity"
+          style="-fx-border-width: 2; -fx-border-color: blue;
+    -fx-border-radius: 3;
+    -fx-border-insets: 2;
+    -fx-padding:10;
+    -fx-font-size: 16;
+    -fx-spacing: 25">
+        <VBox alignment="CENTER">
+            <Label text="Rafael Sánchez González-Palacios"/>
+            <Label text="DAM - Programación - Ejercicio 10 - 11"/>
+        </VBox>
+        <Button text="Aceptar" onAction="#close" minWidth="100"/>
+    </VBox>
+
+</StackPane>

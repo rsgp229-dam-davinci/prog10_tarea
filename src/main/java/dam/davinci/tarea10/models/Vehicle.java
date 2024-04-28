@@ -6,9 +6,15 @@ import java.util.Objects;
 
 /***
  * Esta clase representa un vehículo. Al igual que Person es un Bean de Fx.
+ * La característica cotidiana más distintiva de un vehículo es la matrícula. Realmente un vehículo puede rematricularse,
+ * por lo que, de cara a un modelo, debería ser el número de serie para ser lo más estricto posible de cara a una
+ * posterior normalización.
+ *
+ * En todo caso se ha elegido la matrícula como rasgo 'principal' de un vehículo.
+ *
  * @author Rafael Sánchez González-Palacios
  */
-public class VehicleDTO {
+public class Vehicle {
     private ReadOnlyStringWrapper uuid;
     private StringProperty plate;
     private StringProperty brand;
@@ -16,19 +22,41 @@ public class VehicleDTO {
     private IntegerProperty year;
     private IntegerProperty kilometers;
     private StringProperty notes;
-    private StringProperty ownerDni;
+    private StringProperty ownerId;
 
-    public VehicleDTO(String uuid, String plate, String brand,
-                      String model, int year, int kilometers,
-                      String ownerDni, String notes) {
+    public Vehicle(String uuid, String plate, String brand,
+                   String model, int year, int kilometers,
+                   String ownerId, String notes) {
         this.uuid = new ReadOnlyStringWrapper(uuid);
         this.plate = new SimpleStringProperty(plate);
         this.brand = new SimpleStringProperty(brand);
         this.model = new SimpleStringProperty(model);
         this.year = new SimpleIntegerProperty(year);
         this.kilometers = new SimpleIntegerProperty(kilometers);
-        this.ownerDni = new SimpleStringProperty(ownerDni);
+        this.ownerId = new SimpleStringProperty(ownerId);
         this.notes = new SimpleStringProperty(notes);
+    }
+
+    /**
+     * <p>Constructor mínimo para un vehículo.</p>
+     *
+     * <p>Recientemente he descubierto Objects.requireNonNull(). No es más que un lanzamiento de excepción, pero
+     * me resulta un buen estilo cuando se requiere asegurarse de que no se inician objetos malformados.
+     * En el caso del modelo, no debe iniciarse por ningún medio un vehículo sin matrícula; simplemente no debe
+     * existir.</p>
+     *
+     * @param plate La matrícula del nuevo vehículo (No debe ser null)
+     * @param brand La marca del nuevo vehículo (No debe ser null)
+     */
+    public Vehicle(String plate, String brand)  {
+        this.brand = new SimpleStringProperty(brand);
+        this.plate = new SimpleStringProperty(plate);
+        this.uuid = new ReadOnlyStringWrapper();
+        this.model = new SimpleStringProperty();
+        this.year = new SimpleIntegerProperty();
+        this.kilometers = new SimpleIntegerProperty();
+        this.ownerId = new SimpleStringProperty();
+        this.notes = new SimpleStringProperty();
     }
 
     public String getUuid() {
@@ -103,16 +131,16 @@ public class VehicleDTO {
         this.kilometers.set(kilometers);
     }
 
-    public String getOwnerDni() {
-        return ownerDni.get();
+    public String getOwnerId() {
+        return ownerId.get();
     }
 
-    public StringProperty ownerDniProperty() {
-        return ownerDni;
+    public StringProperty ownerIdProperty() {
+        return ownerId;
     }
 
-    public void setOwnerDni(String ownerDni) {
-        this.ownerDni.set(ownerDni);
+    public void setOwnerId(String ownerId) {
+        this.ownerId.set(ownerId);
     }
 
     public String getNotes() {
@@ -131,7 +159,7 @@ public class VehicleDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VehicleDTO that = (VehicleDTO) o;
+        Vehicle that = (Vehicle) o;
         return Objects.equals(getPlate(), that.getPlate());
     }
 
@@ -143,16 +171,9 @@ public class VehicleDTO {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("VehicleDTO{");
-        sb.append("uuid=").append(uuid.get());
-        sb.append(", plate=").append(plate.get());
-        sb.append(", brand=").append(brand.get());
-        sb.append(", model=").append(model.get());
-        sb.append(", year=").append(year.get());
-        sb.append(", kilometers=").append(kilometers.get());
-        sb.append(", notes=").append(notes.get());
-        sb.append(", ownerDni=").append(ownerDni.get());
-        sb.append("}");
+        sb.append(getBrand()).append(" ");
+        sb.append(getModel()).append(" ");
+        sb.append(getPlate()).append(" ");
         return sb.toString();
     }
 }

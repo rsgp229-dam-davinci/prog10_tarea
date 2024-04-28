@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="dam.davinci.tarea10.controllers.ManageOwnersController"
+      prefHeight="400.0" prefWidth="800.0">
+    <right>
+        <VBox style="-fx-padding: 10; -fx-spacing: 10; -fx-border-insets: 5; -fx-border-radius: 3; -fx-border-color: grey">
+            <GridPane style="-fx-min-width: 300; -fx-spacing: 10; -fx-vgap: 10; -fx-hgap: 5">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="NEVER"/>
+                    <ColumnConstraints hgrow="SOMETIMES"/>
+                </columnConstraints>
+                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="fieldName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="Apellidos:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="fieldSurname" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="Documento:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="fieldNif" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+            <Button text="Añadir propietario" onAction="#addNewOwner" minHeight="50" minWidth="300" style="-fx-text-fill: GREEN; -fx-font-size: 14"/>
+            <Separator/>
+            <VBox VBox.vgrow="NEVER">
+                <Button fx:id="buttonDeleteOwner" text="Eliminar propietario" onAction="#deleteSelectedOwner" minHeight="50" minWidth="300" style="-fx-font-size: 14; -fx-text-fill: RED"/>
+            </VBox>
+            <Separator/>
+            <VBox>
+                <Button text="Salir" onAction="#closeWindow" minHeight="50" minWidth="300" style="-fx-font-size: 14"/>
+            </VBox>
+        </VBox>
+    </right>
+    <center>
+        <TableView fx:id="tableViewOwners" style="-fx-border-insets: 5; -fx-border-color: grey; -fx-border-radius: 3">
+            <columns>
+                <TableColumn fx:id="nameColumn" text="Nombre"/>
+                <TableColumn fx:id="surnameColumn" text="Apellidos"/>
+                <TableColumn fx:id="documentColumn" text="NIF"/>
+            </columns>
+        </TableView>
+    </center>
+
+
+</BorderPane>
